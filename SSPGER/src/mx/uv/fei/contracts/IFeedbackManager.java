@@ -1,4 +1,4 @@
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.contracts;
 
 /**
  *

@@ -1,4 +1,4 @@
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.contracts;
 
 import mx.uv.fei.logic.User;
 import java.sql.SQLException;

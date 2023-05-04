@@ -1,4 +1,4 @@
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.contracts;
 
 import mx.uv.fei.logic.Activity;
 import java.sql.SQLException;
@@ -9,4 +9,5 @@ import java.sql.SQLException;
 
 public interface IActivity {
     public int addActivity (Activity activity) throws SQLException;
+    public Activity getActivity(int idActivity) throws SQLException;
 }

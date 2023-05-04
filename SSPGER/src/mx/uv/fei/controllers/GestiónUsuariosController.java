@@ -1,4 +1,4 @@
-package mx.uv.fei.gui;
+package mx.uv.fei.controllers;
 
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import mx.uv.fei.bussinesslogic.UserDAO;
+import mx.uv.fei.implementations.UserDAO;
 import mx.uv.fei.logic.User;
 
 /**
@@ -115,7 +115,7 @@ public class GestiónUsuariosController implements Initializable {
     @FXML
     void buttonConsult(ActionEvent event) {
         String identificator = this.tableUsers.getSelectionModel().getSelectedItem().getIdentificator();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserInformation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/uv/fei/gui/UserInformation.fxml"));
         Parent root;
         
         UserInformationController.idUser = identificator;

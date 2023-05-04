@@ -1,5 +1,6 @@
 package mx.uv.fei.bussinesslogic;
 
+import mx.uv.fei.implementations.FeedbackDAO;
 import java.util.Date;
 import mx.uv.fei.logic.Feedback;
 import org.junit.After;

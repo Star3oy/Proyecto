@@ -1,5 +1,5 @@
 
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.contracts;
 
 import java.sql.SQLException;
 import java.util.List;

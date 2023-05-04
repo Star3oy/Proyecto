@@ -1,5 +1,5 @@
 
-package mx.uv.fei.gui;
+package mx.uv.fei.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javax.swing.JOptionPane;
-import mx.uv.fei.bussinesslogic.DeliverableFileDAO;
+import mx.uv.fei.implementations.DeliverableFileDAO;
 import mx.uv.fei.logic.DeliverableFile;
 import mx.uv.fei.logic.Feedback;
 import java.util.Date;
-import mx.uv.fei.bussinesslogic.FeedbackManagerDAO;
+import mx.uv.fei.implementations.FeedbackManagerDAO;
 
 /**
  * FXML Controller class

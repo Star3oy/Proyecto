@@ -1,5 +1,6 @@
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.implementations;
 
+import mx.uv.fei.contracts.ILogin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

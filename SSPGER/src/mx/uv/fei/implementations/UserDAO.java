@@ -1,5 +1,5 @@
-package mx.uv.fei.bussinesslogic;
-
+package mx.uv.fei.implementations;
+import mx.uv.fei.contracts.IUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,11 +81,11 @@ public class UserDAO implements IUser{
     public User getUser(String idUser) throws SQLException {
         User user = new User();
         String query = GET_USER_QUERY;
-        
-    Connection connection = DataBaseManager.getConnection();
+        Connection connection = DataBaseManager.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, idUser);
         ResultSet result= statement.executeQuery();
+        
         result.next();
         user.setIdUser(result.getString("idUsuario"));
         user.setFirstName(result.getString("nombre"));                

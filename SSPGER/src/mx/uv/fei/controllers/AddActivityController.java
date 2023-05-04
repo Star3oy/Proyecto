@@ -1,4 +1,4 @@
-package mx.uv.fei.gui;
+package mx.uv.fei.controllers;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import mx.uv.fei.bussinesslogic.ActivityDAO;
+import mx.uv.fei.implementations.ActivityDAO;
 import mx.uv.fei.logic.Activity;
 
 /**
