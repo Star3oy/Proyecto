@@ -1,0 +1,3 @@
+direction = jdbc:mysql://proyecto-sspger.mysql.database.azure.com:3306/proyecto_sspger
+user = CrisCris
+password = Miri0301
