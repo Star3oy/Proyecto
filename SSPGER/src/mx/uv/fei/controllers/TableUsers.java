@@ -1,4 +1,4 @@
-package mx.uv.fei.gui;
+package mx.uv.fei.controllers;
 
 /**
  *

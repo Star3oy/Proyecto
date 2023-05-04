@@ -1,5 +1,6 @@
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.implementations;
 
+import mx.uv.fei.contracts.IUserManager;
 import java.sql.SQLException;
 import mx.uv.fei.dataaccess.DataBaseManager;
 import mx.uv.fei.logic.User;

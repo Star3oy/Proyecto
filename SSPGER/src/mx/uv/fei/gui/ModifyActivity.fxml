@@ -9,8 +9,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="mx.uv.fei.controllers.AddActivityController">
-         <children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="mx.uv.fei.controllers.ModifyActivityController">
+             <children>
       <Pane prefHeight="70.0" prefWidth="1280.0" style="-fx-background-color: #58d68d;">
          <children>
             <Label layoutX="8.0" layoutY="20.0" text="SSPGER">
@@ -32,7 +32,7 @@
       </Pane>
       <Pane layoutY="70.0" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: #85c1e9;">
          <children>
-            <Pane layoutX="123.0" layoutY="30.0" prefHeight="501.0" prefWidth="938.0" style="-fx-background-color: #FFFFFF;">
+            <Pane layoutX="48.0" layoutY="14.0" prefHeight="501.0" prefWidth="938.0" style="-fx-background-color: #FFFFFF;">
                <children>
                   <Label layoutX="65.0" layoutY="30.0" text="Ingrese la información de la actividad y dé clic en el botón  &quot;Guardar&quot;">
                      <font>

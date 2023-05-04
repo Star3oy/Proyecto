@@ -1,5 +1,6 @@
 package mx.uv.fei.bussinesslogic;
 
+import mx.uv.fei.implementations.LoginDAO;
 import mx.uv.fei.logic.Login;
 import org.junit.After;
 import org.junit.AfterClass;

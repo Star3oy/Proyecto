@@ -1,5 +1,6 @@
-package mx.uv.fei.bussinesslogic;
+package mx.uv.fei.implementations;
 
+import mx.uv.fei.contracts.IFeedback;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

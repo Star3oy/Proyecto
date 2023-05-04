@@ -1,5 +1,6 @@
 package mx.uv.fei.bussinesslogic;
 
+
 import java.util.List;
 import mx.uv.fei.logic.User;
 import org.junit.After;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.ArrayList;
+import mx.uv.fei.implementations.UserDAO;
 import static org.junit.Assert.*;
 
 /**
@@ -44,11 +46,11 @@ public class UserDAOTest {
         User user = new User();
         UserDAO instance = new UserDAO();
         
-        user.setIdUser("prueba2");
-        user.setFirstName("prueba2");
-        user.setMiddleName("prueba2");
-        user.setLastName("prueba2");
-        user.setInstitutionalEmail("prueba2");
+        user.setIdUser("Prueba123");
+        user.setFirstName("prueba123");
+        user.setMiddleName("prueba123");
+        user.setLastName("prueba123");
+        user.setInstitutionalEmail("prueba123");
         user.setIdStatus(1);
         user.setIdRole(4);
         
@@ -65,11 +67,11 @@ public class UserDAOTest {
         System.out.println("getUserList");
         
         User user  = new User(); 
-        user.setIdUser("zs21013862");
-        user.setFirstName("Eduardo");
-        user.setMiddleName("Carrera");
-        user.setLastName("Colorado");
-        user.setInstitutionalEmail("zs21013862@estudiantes.uv.mx");
+        user.setIdUser("Prueba123");
+        user.setFirstName("Prueba123");
+        user.setMiddleName("Prueba123");
+        user.setLastName("Prueba123");
+        user.setInstitutionalEmail("Prueba123");
         user.setIdStatus(1);
         user.setIdRole(4); 
         
@@ -99,17 +101,16 @@ public class UserDAOTest {
         System.out.println("getUser");
 
         User expResult  = new User();
-        expResult.setIdUser("zs21013882");
-        expResult.setFirstName("Eduardo");
-        expResult.setMiddleName("Carrera");
-        expResult.setLastName("Colorado");
-        expResult.setInstitutionalEmail("zs21013862@estudiantes.uv.mx");
+        expResult.setIdUser("Prueba123");
+        expResult.setFirstName("prueba123");
+        expResult.setMiddleName("prueba123");
+        expResult.setLastName("prueba123");
+        expResult.setInstitutionalEmail("prueba123");
         expResult.setIdStatus(1);
         expResult.setIdRole(4);
         
         UserDAO instance = new UserDAO();
-        String idUser = "zs21013882";
-        User result = instance.getUser(idUser);
+        User result = instance.getUser(expResult.getIdUser());
 
         assertEquals(expResult, result);
 

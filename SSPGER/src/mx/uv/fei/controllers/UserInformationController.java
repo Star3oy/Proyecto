@@ -1,5 +1,6 @@
-package mx.uv.fei.gui;
+package mx.uv.fei.controllers;
 
+import mx.uv.fei.controllers.ModifyUserController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import mx.uv.fei.bussinesslogic.UserDAO;
+import mx.uv.fei.implementations.UserDAO;
 import mx.uv.fei.logic.User;
 
 

@@ -1,4 +1,4 @@
-package mx.uv.fei.gui;
+package mx.uv.fei.controllers;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
-import mx.uv.fei.bussinesslogic.UserDAO;
+import mx.uv.fei.implementations.UserDAO;
 import mx.uv.fei.logic.User;
 
 /**
