@@ -141,7 +141,7 @@ public class GestiónUsuariosController implements Initializable {
 
     @FXML
     void buttonCreateUser(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("registerUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/uv/fei/gui/registerUser.fxml"));
         Parent root;
     
         try {
