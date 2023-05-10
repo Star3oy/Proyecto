@@ -67,36 +67,16 @@ public class GestiónUsuariosController implements Initializable {
            fillTable();
     }   
     
-    
-
     @FXML
     void buttonAssets(ActionEvent event) throws SQLException {
-    tableUsers.getItems().clear();
-    tableUsers.refresh();
-    UserDAO userDAO = new UserDAO();
-     List<User> userList = userDAO.getActiveUsers();
-        for (int i = 0; i < userList.size(); i++) {
-            User user = userList.get(i);
-            list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
-        }
-     tableUsers.setItems(list);
-     columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
-     columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
+        int ACTIVES = 1;
+        this.fillTableByStatus(ACTIVES);        
     }
     
     @FXML
     void buttonInactives(ActionEvent event) throws SQLException {
-    tableUsers.getItems().clear();
-    tableUsers.refresh();
-    UserDAO userDAO = new UserDAO();
-     List<User> userList = userDAO.getInactiveUsers();
-        for (int i = 0; i < userList.size(); i++) {
-            User user = userList.get(i);
-            list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
-        }
-     tableUsers.setItems(list);
-     columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
-     columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
+        int INACTIVES = 0;
+        this.fillTableByStatus(INACTIVES); 
     }
     
     @FXML
@@ -105,7 +85,7 @@ public class GestiónUsuariosController implements Initializable {
         tableUsers.getItems().clear();
         tableUsers.refresh(); 
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.getUser(idUser);
+        User user = userDAO.getUserById(idUser);
         list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
         tableUsers.setItems(list);
         columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
@@ -173,7 +153,23 @@ public class GestiónUsuariosController implements Initializable {
      columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
     }
     
-
-    
+    void fillTableByStatus(int status){
+        tableUsers.getItems().clear();
+        tableUsers.refresh();
+        UserDAO userDAO = new UserDAO();
+         List<User> userList = null;
+            try {
+                userList = userDAO.getUsersByStatus(status);
+            } catch (SQLException ex) {
+                Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (int i = 0; i < userList.size(); i++) {
+                User user = userList.get(i);
+                list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
+            }
+         tableUsers.setItems(list);
+         columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
+         columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
+    } 
 }
    

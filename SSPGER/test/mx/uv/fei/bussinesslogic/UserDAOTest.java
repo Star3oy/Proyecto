@@ -110,7 +110,7 @@ public class UserDAOTest {
         expResult.setIdRole(4);
         
         UserDAO instance = new UserDAO();
-        User result = instance.getUser(expResult.getIdUser());
+        User result = instance.getUserById(expResult.getIdUser());
 
         assertEquals(expResult, result);
 

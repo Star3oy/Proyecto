@@ -35,12 +35,9 @@ public class UserInformationController  implements Initializable {
     private final int PROFESSOR_ROL = 2;
     public static String idUser;
     
-    
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            infoUser();
+            loadInformationUser();
     }    
     
     @FXML
@@ -110,12 +107,12 @@ public class UserInformationController  implements Initializable {
         }
     }
     
-    void infoUser() {
+    void loadInformationUser() {
      User user = new User();
      UserDAO userDAO = new UserDAO();
      
      try {
-          user = userDAO.getUser(idUser);
+          user = userDAO.getUserById(idUser);
      } catch (SQLException sQLExcpetion) {
          JOptionPane.showMessageDialog(null, "No se pudo conectar con la base de datos. Inténtelo más tarde o hágalo más tarde", 
                                         "ERROR", JOptionPane.ERROR_MESSAGE);   
@@ -130,15 +127,13 @@ public class UserInformationController  implements Initializable {
      textFieldSecondName.setEditable(false);
      textFieldInstitutionalEmail.setText(user.getInstitutionalEmail());
      textFieldInstitutionalEmail.setEditable(false);
-     if(user.getIdRole() == STUDENT_ROL){
+     if(user.getType() == STUDENT_ROL){
          checkBoxStudent.setSelected(true);        
      } else {
          checkBoxProfessor.setSelected(true);      
      }
      checkBoxProfessor.setDisable(true);
      checkBoxStudent.setDisable(true);
-     
-     
     }
     
 }
