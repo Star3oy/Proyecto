@@ -1,6 +1,5 @@
 package mx.uv.fei.controllers;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -34,7 +33,7 @@ import mx.uv.fei.logic.User;
 public class GestiónUsuariosController implements Initializable {
 
     ObservableList<TableUsers> list = FXCollections.observableArrayList();
-    
+      
     @FXML
     private TableColumn<TableUsers, String> columnName;
     
@@ -65,18 +64,18 @@ public class GestiónUsuariosController implements Initializable {
      @Override
     public void initialize(URL url, ResourceBundle rb) { 
            fillTable();
-    }   
-    
+    }
+  
     @FXML
     void buttonAssets(ActionEvent event) throws SQLException {
         int ACTIVES = 1;
-        this.fillTableByStatus(ACTIVES);        
+        this.fillTableByStatus(ACTIVES); 
     }
-    
-    @FXML
+  
+   @FXML
     void buttonInactives(ActionEvent event) throws SQLException {
         int INACTIVES = 0;
-        this.fillTableByStatus(INACTIVES); 
+       this.fillTableByStatus(INACTIVES);
     }
     
     @FXML
@@ -96,8 +95,7 @@ public class GestiónUsuariosController implements Initializable {
     void buttonConsult(ActionEvent event) {
         String identificator = this.tableUsers.getSelectionModel().getSelectedItem().getIdentificator();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/uv/fei/gui/UserInformation.fxml"));
-        Parent root;
-        
+        Parent root;    
         UserInformationController.idUser = identificator;
         if(identificator != null) {
         try {
@@ -153,23 +151,40 @@ public class GestiónUsuariosController implements Initializable {
      columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
     }
     
+    void fillTable () {
+     UserDAO userDAO = new UserDAO();
+     List<User> userList;
+        try {
+            userList = userDAO.getUserList();
+        for (int i = 0; i < userList.size(); i++) {
+            User user = userList.get(i);
+            list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
+        }
+          } catch (SQLException ex) {
+            Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     tableUsers.setItems(list);
+     columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
+     columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
+    }
+    
     void fillTableByStatus(int status){
-        tableUsers.getItems().clear();
-        tableUsers.refresh();
-        UserDAO userDAO = new UserDAO();
-         List<User> userList = null;
-            try {
-                userList = userDAO.getUsersByStatus(status);
-            } catch (SQLException ex) {
-                Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            for (int i = 0; i < userList.size(); i++) {
-                User user = userList.get(i);
-                list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
-            }
-         tableUsers.setItems(list);
-         columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
-         columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
-    } 
+    tableUsers.getItems().clear();
+    tableUsers.refresh();
+    UserDAO userDAO = new UserDAO();
+     List<User> userList = null;
+        try {
+            userList = userDAO.getUsersByStatus(status);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < userList.size(); i++) {
+            User user = userList.get(i);
+            list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
+        }
+     tableUsers.setItems(list);
+     columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
+     columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
+    }
 }
    

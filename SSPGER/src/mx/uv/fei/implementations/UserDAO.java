@@ -140,6 +140,7 @@ public class UserDAO implements IUser{
         String query = "SELECT COUNT(*) FROM usuarios WHERE (idusuario = ? AND nombre = ?) AND"
               +"(primerApellido = ? AND segundoApellido = ?)";
         Connection connection = DataBaseManager.getConnection();
+        
         PreparedStatement statement = connection.prepareStatement(query);
         
         statement.setString(1, user.getIdUser());
@@ -158,7 +159,7 @@ public class UserDAO implements IUser{
     @Override
     public int verifyUserEmail(String email) throws SQLException {
       int cont = 0;
-      String query = "SELECT COUNT(*) FROM usuarios WHERE correoInstitucional = ?";
+      String query = VERIFY_USER_EMAIL_QUERY;
       Connection connection = DataBaseManager.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, email);
@@ -170,7 +171,7 @@ public class UserDAO implements IUser{
     }
     
     @Override
-    public List<User> getUsersByStatus(int status) throws SQLException {
+    public List<User> getUsersByStatus(int status) throws SQLException {  
         List<User> userList = new ArrayList<>(); 
         Connection connection = DataBaseManager.getConnection();
         String query = GET_USERS_BY_STATUS_QUERY;
@@ -184,18 +185,19 @@ public class UserDAO implements IUser{
                 user.setFirstName(result.getString("nombre"));
                 userList.add(user);
             }        
-        DataBaseManager.closeConnection();
-        return userList;
+         DataBaseManager.closeConnection();
+         return userList;
     }
+  
     
     @Override
-    public List<User> getUsersByRole (int idRole)throws SQLException {
+    public List<User> getUsersByType (int type)throws SQLException {
         List<User> userList = new ArrayList<>();
-        String query = "SELECT * FROM usuarios WHERE idRol = ?";
+        String query = "SELECT * FROM usuarios WHERE tipoUsuario = ?";
         
         try (Connection connection = DataBaseManager.getConnection()) { 
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, idRole);
+            statement.setInt(1, type);
             ResultSet result = statement.executeQuery();
             while(result.next()) {
                 User user = new User();
@@ -213,6 +215,6 @@ public class UserDAO implements IUser{
         } finally {
             DataBaseManager.closeConnection();
         }
-        return userList;    
+        return userList;
     }
 }
