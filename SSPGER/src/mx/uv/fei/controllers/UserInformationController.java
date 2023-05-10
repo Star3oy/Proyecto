@@ -1,6 +1,6 @@
 package mx.uv.fei.controllers;
 
-import mx.uv.fei.controllers.ModifyUserController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -94,7 +94,7 @@ public class UserInformationController  implements Initializable {
 
     @FXML
     void buttonModify(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("modifyUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/uv/fei/gui/modifyUser.fxml"));
         Parent root;
         
         ModifyUserController.idUser = textFieldIdentificator.getText();
@@ -130,7 +130,7 @@ public class UserInformationController  implements Initializable {
      textFieldSecondName.setEditable(false);
      textFieldInstitutionalEmail.setText(user.getInstitutionalEmail());
      textFieldInstitutionalEmail.setEditable(false);
-     if(user.getIdRole() == STUDENT_ROL){
+     if(user.getType() == STUDENT_ROL){
          checkBoxStudent.setSelected(true);        
      } else {
          checkBoxProfessor.setSelected(true);      
