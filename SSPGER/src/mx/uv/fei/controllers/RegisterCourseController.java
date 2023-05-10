@@ -124,7 +124,7 @@ public class RegisterCourseController implements Initializable {
                     UserTable selectedUserTable = new UserTable();
                     selectedUserTable.setFirstName(selectedProfessor.getFirstName());
                     selectedUserTable.setIdUser(selectedProfessor.getIdUser());
-                    selectedUserTable.setIdRole(selectedProfessor.getIdRole());
+                    selectedUserTable.setType(selectedProfessor.getType());
                     selectedUsers.add(selectedUserTable);
                     if (!courseDAO.isCourseRegistered(course) && !courseDAO.isNrcActive(course)) {
                         if (courseDAO.registerCourse(course, selectedUsers) == 1) {
@@ -254,7 +254,7 @@ public class RegisterCourseController implements Initializable {
         ObservableList<User> professorsObservableList = FXCollections.observableArrayList();
 
         try {
-            users = userDAO.getUsersByRole(PROFESSOR_ROLE);
+            users = userDAO.getUsersByType(PROFESSOR_ROLE);
         } catch (SQLException sQLException) {
             throw sQLException;
         }
