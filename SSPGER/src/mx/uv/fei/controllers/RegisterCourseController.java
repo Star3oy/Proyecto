@@ -70,15 +70,10 @@ public class RegisterCourseController implements Initializable {
     private TableView<UserTable> tableStudents;
     @FXML
     private TextField textFieldNrc;
-    
     private List<UserTable> selectedUsers = new ArrayList<>();
-   
-    public void setSelectedUsers(List<UserTable> selectedUsers) {
-        this.selectedUsers = selectedUsers;
-    }
         
     @FXML
-    void buttonAddStudents(ActionEvent event) {
+    private void buttonAddStudents(ActionEvent event) {
         CourseDataHolder courseDataHolder = CourseDataHolder.getCourseDataHolder();
         
         courseDataHolder.setTextFieldNrcValue(textFieldNrc.getText());
@@ -94,23 +89,17 @@ public class RegisterCourseController implements Initializable {
         } catch (IOException iOException) {
             Logger.getLogger(RegisterCourseController.class.getName()).log(Level.SEVERE, null, iOException);            
         }
-    }
-    
-    public void loadTableUsers() {
-        ObservableList<UserTable> observableList = FXCollections.observableList(selectedUsers);
-        columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
-        columnIdentificator.setCellValueFactory(new PropertyValueFactory<>("idUser"));
-        tableStudents.setItems(observableList);
     } 
 
     @FXML
-    void buttonSave(ActionEvent event) {
+    private void buttonSave(ActionEvent event) {
         if (!isItemEmpty()) {
             if (isNumeric()) {
                 Course course = new Course();
                 User selectedProfessor = new User();
                 CourseDAO courseDAO = new CourseDAO();
                 int ACTIVE = 1;
+                int SUCCESS = 1;
                 
                 try {
                     course.setIdEducationalExperience(choiceBoxEducationalExperience.getValue().getIdEducationalExperience());
@@ -127,7 +116,7 @@ public class RegisterCourseController implements Initializable {
                     selectedUserTable.setType(selectedProfessor.getType());
                     selectedUsers.add(selectedUserTable);
                     if (!courseDAO.isCourseRegistered(course) && !courseDAO.isNrcActive(course)) {
-                        if (courseDAO.registerCourse(course, selectedUsers) == 1) {
+                        if (courseDAO.registerCourse(course, selectedUsers) == SUCCESS) {
                                 MessageDialog.showSuccessMessage();
                                 CourseDataHolder.getCourseDataHolder().destroyCourseDataHolder();
                         } else {
@@ -148,7 +137,7 @@ public class RegisterCourseController implements Initializable {
     }
     
     @FXML
-    void buttonCancel(ActionEvent event) {
+    private void buttonCancel(ActionEvent event) {
         if (MessageDialog.showCancelMessage()) {
             CourseDataHolder.getCourseDataHolder().destroyCourseDataHolder();
             Stage stage = (Stage) this.buttonCancel.getScene().getWindow();
@@ -248,13 +237,13 @@ public class RegisterCourseController implements Initializable {
     }
 
     private void setProfessorsBox() throws SQLException {
-        int PROFESSOR_ROLE = 2;
+        int PROFESSOR = 0;
         UserDAO userDAO = new UserDAO();
         List<User> users = null;
         ObservableList<User> professorsObservableList = FXCollections.observableArrayList();
 
         try {
-            users = userDAO.getUsersByType(PROFESSOR_ROLE);
+            users = userDAO.getUsersByType(PROFESSOR);
         } catch (SQLException sQLException) {
             throw sQLException;
         }
@@ -275,6 +264,18 @@ public class RegisterCourseController implements Initializable {
         choiceBoxSection.setValue(course.getChoiceBoxSectionValue());
         choiceBoxBlock.setValue(course.getChoiceBoxBlockValue());
         choiceBoxProfessor.setValue(course.getChoiceBoxProfessorValue());
+    }
+    
+    public void setSelectedUsers(List<UserTable> selectedUsers) {
+        this.selectedUsers = selectedUsers;
+    }
+    
+    public void loadTableUsers() {
+        ObservableList<UserTable> observableList = FXCollections.observableList(selectedUsers);
+        columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + 
+                cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
+        columnIdentificator.setCellValueFactory(new PropertyValueFactory<>("idUser"));
+        tableStudents.setItems(observableList);
     }
        
     /**
