@@ -1,8 +1,11 @@
 package mx.uv.fei.bussinesslogic;
 
+import java.sql.SQLException;
 import mx.uv.fei.implementations.ActivityDAO;
 import java.util.Date;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mx.uv.fei.logic.Activity;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,7 +48,7 @@ public class ActivityDAOTest {
         java.sql.Date sqldateTest = new java.sql.Date(dateTest.getTime());
  
     
-        activity.setTitle("Actividad de prueba");
+        activity.setTitle("Prueba agregar actividad");
         activity.setStatus(1);
         activity.setDetails("Esta es una prueba ");
         activity.setStartDate(sqldateTest);
@@ -66,6 +69,30 @@ public class ActivityDAOTest {
         Date result = instance.convertLocalDateToDate(date);
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void getActivity(){
+        System.out.println("getActivity");
+        Date dateTest = new Date();
+        Activity activity = new Activity();
+        ActivityDAO activityDAO = new ActivityDAO();
+        
+        activity.setIdActivity(2);
+        activity.setTitle("Prueba agregar actividad");
+        activity.setStatus(1);
+        activity.setDetails("Esta es una prueba");
+        activity.setStartDate(dateTest);
+        activity.setFinishDate(dateTest);
+        activity.setIdUser(null);
+        
+        Activity result = new Activity();
+        try {
+            result = activityDAO.getActivity(2);
+        } catch (SQLException ex) {
+            Logger.getLogger(ActivityDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertEquals(activity, result);
     }
     
 }

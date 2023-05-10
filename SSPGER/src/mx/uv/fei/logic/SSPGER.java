@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mx.uv.fei.controllers.RegisterCourseController;
 
-/**
+/** 
  *
  * @author Star3oy
  */

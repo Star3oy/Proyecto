@@ -72,9 +72,9 @@ public class RegisterUserController implements Initializable{
     
 
     @FXML
-    private void buttonSave(ActionEvent event) throws SQLException{
-        int STUDENT_ROL = 4;
-        int PROFESSOR_ROL = 2;
+    private void buttonSave(ActionEvent event) {
+        int STUDENT_TYPE = 1;
+        int PROFESSOR_TYPE = 0;
         int ACTIVE = 1;
         
         
@@ -86,9 +86,9 @@ public class RegisterUserController implements Initializable{
         user.setInstitutionalEmail(textFieldInstitutionalEmail.getText());
         user.setIdStatus(ACTIVE);  
         if(checkBoxStudent.isSelected()) {
-            user.setIdRole(STUDENT_ROL);
+            user.setType(STUDENT_TYPE);
         } else if (checkBoxProfessor.isSelected()) {
-            user.setIdRole(PROFESSOR_ROL);
+            user.setType(PROFESSOR_TYPE);
         }
         
         Login login = new Login();
@@ -120,7 +120,6 @@ public class RegisterUserController implements Initializable{
     
   private boolean isNotItemEmpty (){
       boolean result = false;
-      
       if (textFieldFirstName.getText().isEmpty() || textFieldIdentificator.getText().isEmpty() ||
           textFieldInstitutionalEmail.getText().isEmpty() ||textFieldMiddleName.getText().isEmpty() ||
            textFieldSecondName.getText().isEmpty()) {
