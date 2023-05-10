@@ -9,7 +9,7 @@ public class User {
      private String lastName;
      private String institutionalEmail;
      private int idStatus;
-     private int idRole;
+     private int type;
 
     public String getIdUser() {
         return idUser;
@@ -59,12 +59,12 @@ public class User {
         this.idStatus = idStatus;
     }
 
-    public int getIdRole() {
-        return idRole;
+    public int getType() {
+        return type;
     }
 
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
+    public void setType(int type) {
+        this.type = type;
     }
     
     @Override 
@@ -79,7 +79,7 @@ public class User {
             && (this.lastName == null ? otherUser.lastName == null : this.lastName.equals(otherUser.lastName))
             && (this.institutionalEmail == null ? otherUser.institutionalEmail == null : this.institutionalEmail.equals(otherUser.institutionalEmail))
             && this.idStatus == otherUser.idStatus
-            && this.idRole == otherUser.idRole;
+            && this.type == otherUser.type;
         }
     }
      
