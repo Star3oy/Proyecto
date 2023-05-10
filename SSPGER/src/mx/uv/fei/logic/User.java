@@ -1,6 +1,4 @@
-
 package mx.uv.fei.logic;
-
 
 public class User {
      private String idUser;
@@ -81,5 +79,10 @@ public class User {
             && this.idStatus == otherUser.idStatus
             && this.type == otherUser.type;
         }
+    
+    @Override
+    public String toString() {
+        return firstName + " " + middleName + " " + lastName;
     }
+}
      

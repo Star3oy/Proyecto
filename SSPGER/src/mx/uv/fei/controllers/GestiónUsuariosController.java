@@ -64,15 +64,15 @@ public class GestiónUsuariosController implements Initializable {
      @Override
     public void initialize(URL url, ResourceBundle rb) { 
            fillTable();
-    }   
-   
+    }
+  
     @FXML
     void buttonAssets(ActionEvent event) throws SQLException {
         int ACTIVES = 1;
-        this.fillTableByStatus(ACTIVES);
+        this.fillTableByStatus(ACTIVES); 
     }
-    
-    @FXML
+  
+   @FXML
     void buttonInactives(ActionEvent event) throws SQLException {
         int INACTIVES = 0;
        this.fillTableByStatus(INACTIVES);
@@ -84,7 +84,7 @@ public class GestiónUsuariosController implements Initializable {
         tableUsers.getItems().clear();
         tableUsers.refresh(); 
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.getUser(idUser);
+        User user = userDAO.getUserById(idUser);
         list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
         tableUsers.setItems(list);
         columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
@@ -132,6 +132,23 @@ public class GestiónUsuariosController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    void fillTable () {
+     UserDAO userDAO = new UserDAO();
+     List<User> userList;
+        try {
+            userList = userDAO.getUserList();
+        for (int i = 0; i < userList.size(); i++) {
+            User user = userList.get(i);
+            list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
+        }
+          } catch (SQLException ex) {
+            Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     tableUsers.setItems(list);
+     columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
+     columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
     }
     
     void fillTable () {
