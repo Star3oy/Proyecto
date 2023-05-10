@@ -37,32 +37,41 @@ import mx.uv.fei.logic.SSPGER;
 public class AddStudentsToCourseController implements Initializable {
     @FXML
     private Button buttonCancel;
-
     @FXML
     private Button buttonSave;
-
     @FXML
     private Button buttonSearch;
-
     @FXML
     private TableColumn<UserTable, CheckBox> columnCheck;
-
     @FXML
     private TableColumn<UserTable, String> columnIdentificator;
-
     @FXML
     private TableColumn<UserTable, String> columnName;
-
     @FXML
     private TableView<UserTable> tableStudents;
-
     @FXML
     private TextField textFieldSearchUser;
     private List<UserTable> usersList = new ArrayList<>();
     private List<UserTable> userSelected = new ArrayList<>();
+    
+    private void loadTableUsers() {
+        UserTableDAO userTableDAO = new UserTableDAO();
+
+        try {
+            usersList = userTableDAO.getStudents();
+            columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + 
+                    cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
+            columnIdentificator.setCellValueFactory(new PropertyValueFactory<>("idUser"));
+            columnCheck.setCellValueFactory(new PropertyValueFactory<>("userSelected"));
+            ObservableList<UserTable> observableList = FXCollections.observableList(usersList);
+            tableStudents.setItems(observableList);
+        } catch (SQLException sQLException) {
+            Logger.getLogger(AddStudentsToCourseController.class.getName()).log(Level.SEVERE, null, sQLException);
+        }
+    }
 
     @FXML
-    void buttonCancel(ActionEvent event) {
+    private void buttonCancel(ActionEvent event) {
         if (MessageDialog.showCancelMessage()) {
             Stage stage = (Stage) this.buttonCancel.getScene().getWindow();
             SSPGER sspger = new SSPGER();
@@ -75,7 +84,7 @@ public class AddStudentsToCourseController implements Initializable {
     }
     
     @FXML
-    public void buttonSave(ActionEvent event) {
+    private void buttonSave(ActionEvent event) {
         ObservableList<UserTable> rowsUserTables = tableStudents.getItems();
         for (UserTable userTable : rowsUserTables) {
             if (userTable.getUserSelected().isSelected()) {
@@ -92,7 +101,7 @@ public class AddStudentsToCourseController implements Initializable {
     }
 
     @FXML
-    void buttonSearch(ActionEvent event) {
+    private void buttonSearch(ActionEvent event) {
         String idUser = textFieldSearchUser.getText();
         ObservableList<UserTable> observableUsersList = FXCollections.observableList(usersList);
         try {
@@ -108,14 +117,14 @@ public class AddStudentsToCourseController implements Initializable {
             selectedUserTable.setType(user.getType());
             observableUsersList.add(selectedUserTable);
             tableStudents.setItems(observableUsersList);
-            columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
+            columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + 
+                    cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
             columnIdentificator.setCellValueFactory(new PropertyValueFactory<UserTable, String>("idUser"));
             columnCheck.setCellValueFactory(new PropertyValueFactory<UserTable, CheckBox>("userSelected"));
         } catch (SQLException sQLException) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No se pudo obtener el usuario");
-            //alert.setContentText(sQLException.getMessage());
             alert.showAndWait();
         }
     }
@@ -126,20 +135,5 @@ public class AddStudentsToCourseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadTableUsers();
-    }
-
-    private void loadTableUsers() {
-        UserTableDAO userTableDAO = new UserTableDAO();
-
-        try {
-            usersList = userTableDAO.getStudents();
-            columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
-            columnIdentificator.setCellValueFactory(new PropertyValueFactory<>("idUser"));
-            columnCheck.setCellValueFactory(new PropertyValueFactory<>("userSelected"));
-            ObservableList<UserTable> observableList = FXCollections.observableList(usersList);
-            tableStudents.setItems(observableList);
-        } catch (SQLException sQLException) {
-            Logger.getLogger(AddStudentsToCourseController.class.getName()).log(Level.SEVERE, null, sQLException);
-        }
     }      
 }

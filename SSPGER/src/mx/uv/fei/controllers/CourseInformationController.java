@@ -25,7 +25,6 @@ import mx.uv.fei.implementations.CourseDAO;
 import mx.uv.fei.implementations.EducationalExperienceDAO;
 import mx.uv.fei.implementations.SchoolPeriodDAO;
 import mx.uv.fei.implementations.SectionDAO;
-import mx.uv.fei.implementations.UserDAO;
 import mx.uv.fei.logic.Block;
 import mx.uv.fei.logic.Course;
 import mx.uv.fei.logic.EducationalExperience;
@@ -40,87 +39,60 @@ import mx.uv.fei.logic.UserTable;
  * @author sue 
  */
 public class CourseInformationController implements Initializable {
+    @FXML
+    private Button buttonDisable;
+    @FXML
+    private Button buttonModify;
+    @FXML
+    private ChoiceBox<Block> choiceBoxBlock;
+    @FXML
+    private ChoiceBox<EducationalExperience> choiceBoxEducationalExperience;
+    @FXML
+    private ChoiceBox<User> choiceBoxProfessor;
+    @FXML
+    private ChoiceBox<SchoolPeriod> choiceBoxSchoolPeriod;
+    @FXML
+    private ChoiceBox<Section> choiceBoxSection;
+    @FXML
+    private TableColumn<UserTable, String> columnIdentificator;
+    @FXML
+    private TableColumn<UserTable, String> columnName;
+    @FXML
+    private TableView<UserTable> tableStudents;
+    @FXML
+    private TextField textFieldNrc;
     public static int idCourse;
 
     @FXML
-    private Button buttonDisable;
-
-    @FXML
-    private Button buttonModify;
-
-    @FXML
-    private ChoiceBox<Block> choiceBoxBlock;
-
-    @FXML
-    private ChoiceBox<EducationalExperience> choiceBoxEducationalExperience;
-
-    @FXML
-    private ChoiceBox<User> choiceBoxProfessor;
-
-    @FXML
-    private ChoiceBox<SchoolPeriod> choiceBoxSchoolPeriod;
-
-    @FXML
-    private ChoiceBox<Section> choiceBoxSection;
-
-    @FXML
-    private TableColumn<UserTable, String> columnIdentificator;
-
-    @FXML
-    private TableColumn<UserTable, String> columnName;
-
-    @FXML
-    private TableView<UserTable> tableStudents;
-
-    @FXML
-    private TextField textFieldNrc;
-
-    @FXML
-    void buttonDisable(ActionEvent event) {
+    private void buttonDisable(ActionEvent event) {
         int SUCCESS = 1;
         if (MessageDialog.showDiseableConfirmation()) {
-           CourseDAO courseDAO = new CourseDAO();
-           try {
-               int result = courseDAO.diseableCourse(idCourse);
+            CourseDAO courseDAO = new CourseDAO();
+            try {
+                int result = courseDAO.diseableCourse(idCourse);
                 if (result == SUCCESS) {
                     MessageDialog.showSuccessMessage();
                 } else {
                     MessageDialog.showErrorDatabaseMessage();
                 }
-           } catch (SQLException sQLException) {
+            } catch (SQLException sQLException) {
                 Logger.getLogger(CourseInformationController.class.getName()).log(Level.SEVERE, null, sQLException);            
            }
        }
     }
 
     @FXML
-    void buttonModify(ActionEvent event) {
+    private void buttonModify(ActionEvent event) {
 
     }
     
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        loadInformationCourse();
-        try {
-            loadTableStudents();
-        } catch (SQLException sQLException) {
-            MessageDialog.showErrorDatabaseMessage();;
-        }
-    }
-    
     private void loadInformationCourse() {
-        int PROFESSOR_ROLE = 2;
         Course course = new Course();
-        Block block = new Block();
         EducationalExperienceDAO educationalExperienceDAO = new EducationalExperienceDAO();
         CourseDAO courseDAO = new CourseDAO();
         BlockDAO blockDAO = new BlockDAO();
         SectionDAO sectionDAO = new SectionDAO();
         SchoolPeriodDAO schoolPeriodDAO = new SchoolPeriodDAO();
-        UserDAO userDAO = new UserDAO();
         
         try {
             course = courseDAO.getCourseById(idCourse);
@@ -131,8 +103,7 @@ public class CourseInformationController implements Initializable {
             choiceBoxSchoolPeriod.setValue(schoolPeriodDAO.getSchoolPeriodById(course.getIdSchoolPeriod()));
             choiceBoxSection.setValue(sectionDAO.getSectionById(course.getIdSection()));
             choiceBoxBlock.setValue(blockDAO.getBlockById(course.getIdBlock()));
-            choiceBoxProfessor.setValue(courseDAO.getProfessorOfCourse(course.getIdCourse()));
-            
+            choiceBoxProfessor.setValue(courseDAO.getProfessorOfCourse(course.getIdCourse())); 
         } catch (SQLException sQLException) {
             MessageDialog.showErrorDatabaseMessage();
         }
@@ -142,7 +113,8 @@ public class CourseInformationController implements Initializable {
         List<UserTable> studentsOnCourseList = new ArrayList<>();
         studentsOnCourseList = setStudents();
         ObservableList<UserTable> observableUserTableList = FXCollections.observableList(studentsOnCourseList);
-        columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
+        columnName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName() + " " + 
+                cellData.getValue().getMiddleName()+ " " + cellData.getValue().getLastName()));    
         columnIdentificator.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         tableStudents.setItems(observableUserTableList);
     }
@@ -161,5 +133,18 @@ public class CourseInformationController implements Initializable {
             userTableList.add(userTable);
         }
        return userTableList; 
+    }
+    
+     /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        loadInformationCourse();
+        try {
+            loadTableStudents();
+        } catch (SQLException sQLException) {
+            MessageDialog.showErrorDatabaseMessage();;
+        }
     }
 }

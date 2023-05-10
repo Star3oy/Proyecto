@@ -26,9 +26,7 @@ import mx.uv.fei.implementations.SchoolPeriodDAO;
 import mx.uv.fei.logic.Course;
 import mx.uv.fei.logic.CourseTable;
 import mx.uv.fei.logic.SchoolPeriod;
-import mx.uv.fei.logic.UserTable;
 import mx.uv.fei.logic.SSPGER;
-
 
 /**
  * FXML Controller class
@@ -38,46 +36,34 @@ import mx.uv.fei.logic.SSPGER;
 public class CourseManageController implements Initializable {
     @FXML
     private Button buttonAssets;
-
     @FXML
     private Button buttonConsult;
-
     @FXML
     private Button buttonCreateCourse;
-
     @FXML
     private Button buttonInactives;
-
     @FXML
     private Button buttonSearch;
-
     @FXML
     private TableColumn<CourseTable, String> columnName;
-
     @FXML
     private TableColumn<CourseTable, String> columnNrc;
-
     @FXML
     private TableColumn<CourseTable, String> columnSchoolPeriod;
-
     @FXML
     private TableView<CourseTable> tableCourses;
-
     @FXML
     private TextField textFieldSearchCourse;
-    
     private List<CourseTable> courseList = new ArrayList<>();
     private ObservableList<CourseTable> observableCourseList = FXCollections.observableArrayList();
 
-    @FXML
-    void buttonAssets(ActionEvent event) {
-        int ACTIVE_COURSE = 1;
+    private void fillCoursesTableByStatus(int status) {
         tableCourses.getItems().clear();
         tableCourses.refresh();
         CourseTableDAO courseTableDAO = new CourseTableDAO();
     
         try {
-            courseList = courseTableDAO.getCoursesByStatus(ACTIVE_COURSE);
+            courseList = courseTableDAO.getCoursesByStatus(status);
             columnNrc.setCellValueFactory(new PropertyValueFactory<>("nrc"));
             columnSchoolPeriod.setCellValueFactory(new PropertyValueFactory<>("namePeriod"));
             columnSchoolPeriod.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -87,9 +73,20 @@ public class CourseManageController implements Initializable {
             Logger.getLogger(CourseManageController.class.getName()).log(Level.SEVERE, null, sQLException);
         }
     }
+    @FXML
+    private void buttonAssets(ActionEvent event) {
+        int ACTIVE_COURSE = 1;
+        this.fillCoursesTableByStatus(ACTIVE_COURSE);
+    }
+    
+    @FXML
+    private void buttonInactives(ActionEvent event) {
+        int INACTIVE_COURSE = 0;
+        this.fillCoursesTableByStatus(INACTIVE_COURSE);
+    }
 
     @FXML
-    void buttonConsult(ActionEvent event) {
+    private void buttonConsult(ActionEvent event) {
         if (this.tableCourses.getSelectionModel().getSelectedIndex()!= -1) {
             int idCourse = this.tableCourses.getSelectionModel().getSelectedItem().getIdCourse();
             Stage stage = (Stage) this.buttonConsult.getScene().getWindow();
@@ -109,7 +106,7 @@ public class CourseManageController implements Initializable {
     }
 
     @FXML
-    void buttonCreateCourse(ActionEvent event) {
+    private void buttonCreateCourse(ActionEvent event) {
         Stage stage = (Stage) this.buttonCreateCourse.getScene().getWindow();
         SSPGER sspger = new SSPGER();
         try {
@@ -120,26 +117,7 @@ public class CourseManageController implements Initializable {
     }
 
     @FXML
-    void buttonInactives(ActionEvent event) {
-        int INACTIVE_COURSE = 0;
-        tableCourses.getItems().clear();
-        tableCourses.refresh();
-        CourseTableDAO courseTableDAO = new CourseTableDAO();
-    
-        try {
-            courseList = courseTableDAO.getCoursesByStatus(INACTIVE_COURSE);
-            columnNrc.setCellValueFactory(new PropertyValueFactory<>("nrc"));
-            columnSchoolPeriod.setCellValueFactory(new PropertyValueFactory<>("namePeriod"));
-            columnSchoolPeriod.setCellValueFactory(new PropertyValueFactory<>("name"));
-            ObservableList<CourseTable> observableList = FXCollections.observableList(courseList);
-            tableCourses.setItems(observableList);
-        } catch (SQLException sQLException) {
-            Logger.getLogger(CourseManageController.class.getName()).log(Level.SEVERE, null, sQLException);
-        }
-    }
-
-    @FXML
-    void buttonSearch(ActionEvent event) {
+    private void buttonSearch(ActionEvent event) {
          String nrc = textFieldSearchCourse.getText();
          ObservableList<CourseTable> observableUsersList = FXCollections.observableList(courseList);
          try {
@@ -167,15 +145,7 @@ public class CourseManageController implements Initializable {
             alert.showAndWait();
         }
     }
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        loadTableCourses();
-    }
-
+    
     private void loadTableCourses() {
         CourseTableDAO courseTableDAO = new CourseTableDAO();
 
@@ -189,6 +159,14 @@ public class CourseManageController implements Initializable {
         } catch (SQLException sQLException) {
             Logger.getLogger(AddStudentsToCourseController.class.getName()).log(Level.SEVERE, null, sQLException);
         }
+    }
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        loadTableCourses();
     }    
     
 }

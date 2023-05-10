@@ -134,7 +134,7 @@ public class GestiónUsuariosController implements Initializable {
         }
     }
     
-    void fillTable () {
+    void fillTable() {
      UserDAO userDAO = new UserDAO();
      List<User> userList;
         try {
