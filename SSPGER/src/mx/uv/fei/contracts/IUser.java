@@ -14,6 +14,5 @@ public interface IUser {
     int disableUser (String idUser) throws SQLException;
     int verifyUserExistence (User user) throws SQLException;
     int verifyUserEmail(String email) throws SQLException;
-    List<User> getActiveUsers() throws SQLException;
-    List<User> getInactiveUsers() throws SQLException;
+    List<User> getUsersByStatus(int status) throws SQLException;
 }
