@@ -151,23 +151,6 @@ public class GestiónUsuariosController implements Initializable {
      columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
     }
     
-    void fillTable () {
-     UserDAO userDAO = new UserDAO();
-     List<User> userList;
-        try {
-            userList = userDAO.getUserList();
-        for (int i = 0; i < userList.size(); i++) {
-            User user = userList.get(i);
-            list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
-        }
-          } catch (SQLException ex) {
-            Logger.getLogger(GestiónUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-     tableUsers.setItems(list);
-     columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
-     columnName.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("name"));
-    }
-    
     void fillTableByStatus(int status){
     tableUsers.getItems().clear();
     tableUsers.refresh();

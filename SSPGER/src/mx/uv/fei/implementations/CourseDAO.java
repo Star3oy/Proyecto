@@ -60,12 +60,12 @@ public class CourseDAO implements ICourse{
     private void insertUsersInCourse(int idCourse, List<UserTable> selectedUsers) throws SQLException {
         try {
             DataBaseManager.getConnection().setAutoCommit(false);
-            String query = "INSERT INTO usuarios_cursos(idUsuario, idCurso, idRol) VALUES(?,?,?)";
+            String query = "INSERT INTO usuarios_cursos(idUsuario, idCurso, tipoUsuario) VALUES(?,?,?)";
             PreparedStatement statement = DataBaseManager.getConnection().prepareStatement(query);
             for (User user : selectedUsers) {
                 statement.setString(1, user.getIdUser());
                 statement.setInt(2, idCourse);
-                statement.setInt(3, user.getIdRole());
+                statement.setInt(3, user.getType());
                 statement.addBatch();
             }
             statement.executeBatch();
@@ -324,7 +324,7 @@ public class CourseDAO implements ICourse{
             user.setLastName(result.getString("segundoApellido"));
             user.setInstitutionalEmail(result.getString("correoInstitucional"));
             user.setIdStatus(result.getInt("estado"));
-            user.setIdRole(result.getInt("idRol"));
+            user.setType(result.getInt("tipoUsuario"));
         } catch (SQLException sQLException) {
             throw sQLException;
         } finally {
@@ -353,7 +353,7 @@ public class CourseDAO implements ICourse{
                 user.setLastName(result.getString("segundoApellido"));
                 user.setInstitutionalEmail(result.getString("correoInstitucional"));
                 user.setIdStatus(result.getInt("estado"));
-                user.setIdRole(result.getInt("idRol"));
+                user.setType(result.getInt("idRol"));
                 studentsOFCourse.add(user);
             }
         } catch (SQLException sQLException) {

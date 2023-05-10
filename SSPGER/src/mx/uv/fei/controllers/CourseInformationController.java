@@ -157,9 +157,8 @@ public class CourseInformationController implements Initializable {
             userTable.setMiddleName(user.getMiddleName());            
             userTable.setLastName(user.getLastName());
             userTable.setIdUser(user.getIdUser());
-            userTable.setIdRole(user.getIdRole());
+            userTable.setType(user.getType());
             userTableList.add(userTable);
-            System.out.println(userTable);
         }
        return userTableList; 
     }
