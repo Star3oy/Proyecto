@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="mx.uv.fei.controllers.TimeLineController">
+                <children>
+      <Pane prefHeight="70.0" prefWidth="1280.0" style="-fx-background-color: #58d68d;">
+         <children>
+            <Label layoutX="8.0" layoutY="20.0" text="SSPGER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="96.0" layoutY="13.0" text="Información usuario">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="855.0" layoutY="12.0" text="Universidad Veracruzana">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="70.0" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: #85c1e9;">
+         <children>
+            <Button fx:id="buttonModify" layoutX="988.0" layoutY="560.0" mnemonicParsing="false" onAction="#buttonModify" prefHeight="45.0" prefWidth="125.0" text="Editar" />
+            <Button fx:id="buttonAddActivity" layoutX="218.0" layoutY="560.0" mnemonicParsing="false" onAction="#buttonAddActivity" prefHeight="45.0" prefWidth="125.0" text="Agregar Actividad" />
+            <Button fx:id="buttonConsult" layoutX="806.0" layoutY="560.0" mnemonicParsing="false" onAction="#buttonConsult" prefHeight="45.0" prefWidth="125.0" text="Consultar" />
+            <Pane layoutX="182.0" layoutY="35.0" prefHeight="501.0" prefWidth="938.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <Label layoutX="119.0" layoutY="87.0" text="Filtado por: ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="buttonDone" layoutX="234.0" layoutY="85.0" mnemonicParsing="false" onAction="#buttonDone" text="Realizadas" />
+                  <Button fx:id="buttonNotDone" layoutX="363.0" layoutY="85.0" mnemonicParsing="false" onAction="#buttonNotDone" text="Sin Realizar" />
+                  <Label layoutX="119.0" layoutY="48.0" text="Selecciona una actividad: " />
+                  <TableView fx:id="tableActivities" layoutX="119.0" layoutY="123.0" prefHeight="348.0" prefWidth="641.0">
+                    <columns>
+                      <TableColumn fx:id="columnActivity" prefWidth="241.0" text="Actividad" />
+                      <TableColumn fx:id="columnStartDate" prefWidth="145.0" text="Fecha Inicio" />
+                        <TableColumn fx:id="columnFinishDate" prefWidth="107.0" text="Fecha Fin " />
+                        <TableColumn fx:id="columnStatus" prefWidth="147.0" text="Estado" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children> 
+</AnchorPane>

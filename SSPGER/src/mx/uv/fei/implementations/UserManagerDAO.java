@@ -32,7 +32,7 @@ public class UserManagerDAO implements IUserManager{
         userStatement.setString(4,user.getLastName());
         userStatement.setString(5,user.getInstitutionalEmail());
         userStatement.setInt(6, user.getIdStatus());
-        userStatement.setInt(7, user.getIdRole());
+        userStatement.setInt(7, user.getType());
         
         response =  userStatement.executeUpdate();
         

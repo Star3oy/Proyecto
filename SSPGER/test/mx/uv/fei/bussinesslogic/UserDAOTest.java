@@ -45,15 +45,14 @@ public class UserDAOTest {
         System.out.println("registerUser");
         User user = new User();
         UserDAO instance = new UserDAO();
-        
         user.setIdUser("Prueba123");
         user.setFirstName("prueba123");
         user.setMiddleName("prueba123");
         user.setLastName("prueba123");
         user.setInstitutionalEmail("prueba123");
         user.setIdStatus(1);
-        user.setIdRole(4);
-        
+        int STUDENT_TYPE = 1;
+        user.setType(STUDENT_TYPE);
         int expResult = 1;
         int result = instance.addUser(user);
         assertEquals(expResult, result);
@@ -73,7 +72,7 @@ public class UserDAOTest {
         user.setLastName("Prueba123");
         user.setInstitutionalEmail("Prueba123");
         user.setIdStatus(1);
-        user.setIdRole(4); 
+        user.setType(4); 
         
         User userAux = new User();
         userAux.setIdUser("zs21013882");
@@ -82,7 +81,7 @@ public class UserDAOTest {
         userAux.setLastName("Colorado");
         userAux.setInstitutionalEmail("zs21013862@estudiantes.uv.mx");
         userAux.setIdStatus(1);
-        userAux.setIdRole(4);
+        userAux.setType(4);
 
         UserDAO instance = new UserDAO();
         List<User> expResult = new ArrayList<>();
@@ -107,7 +106,7 @@ public class UserDAOTest {
         expResult.setLastName("prueba123");
         expResult.setInstitutionalEmail("prueba123");
         expResult.setIdStatus(1);
-        expResult.setIdRole(4);
+        expResult.setType(4);
         
         UserDAO instance = new UserDAO();
         User result = instance.getUser(expResult.getIdUser());
@@ -129,7 +128,7 @@ public class UserDAOTest {
         user.setLastName("Carrera2");
         user.setInstitutionalEmail("2Prueba@estudiantes.uv.mx");
         user.setIdStatus(1);
-        user.setIdRole(4);
+        user.setType(4);
         
         int expResult = 1;
         String idUser = "zs21013882";
@@ -164,7 +163,7 @@ public class UserDAOTest {
         user.setLastName("Colorado");
         user.setInstitutionalEmail("zs21013862@estudiantes.uv.mx");
         user.setIdStatus(1);
-        user.setIdRole(4);
+        user.setType(4);
         
         int result = instance.verifyUserExistence(user);
         

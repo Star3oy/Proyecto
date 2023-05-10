@@ -48,8 +48,7 @@ public class AddActivityController implements Initializable {
         activity.setDetails(textAreaDetails.getText());
         activity.setStatus(1);
         activity.setStartDate(activityDAO.convertLocalDateToDate(datepickerStart.getValue()));
-        activity.setStartDate(activityDAO.convertLocalDateToDate(datepickerStart.getValue()));
-        
+        activity.setFinishDate(activityDAO.convertLocalDateToDate(datePickerFinish.getValue()));
         try {
             activityDAO.addActivity(activity);
         } catch (SQLException ex) {

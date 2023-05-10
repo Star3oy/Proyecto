@@ -15,7 +15,7 @@ public class Activity {
     private Date  startDate;
     private Date finishDate;
     private int status;
-    private String idUsuario;
+    private String idUser;
 
     public int getIdActivity() {
         return idActivity;
@@ -65,13 +65,27 @@ public class Activity {
         this.status = status;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
+    
+        @Override 
+        public boolean equals(Object object) {
+        if((object == null) || (object.getClass() != this.getClass())) {
+            return false;
+        } 
+       final Activity otherActivity = (Activity) object;
+       return this.idActivity == otherActivity.idActivity
+        && (this.title == null ? otherActivity.title == null : this.title.equals(otherActivity.title))
+        && (this.details == null ? otherActivity.details == null : this.title.equals(otherActivity.details))
+        &&   this.startDate == otherActivity.startDate
+        && this.finishDate == otherActivity.finishDate
+        && (this.idUser == null ? otherActivity.idUser == null : this.idUser.equals(otherActivity.idUser));
+        }
     
     
 }

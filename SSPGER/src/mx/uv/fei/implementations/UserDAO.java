@@ -19,11 +19,11 @@ public class UserDAO implements IUser{
     
     
     private final String ADD_USER_COMMAND = "insert into usuarios(idUsuario, nombre, primerApellido, segundoApellido,"
-                + "correoInstitucional, estado, idRol) values(?, ?, ?, ?, ?, ?, ?)";
+                + "correoInstitucional, estado, tipoUsuario) values(?, ?, ?, ?, ?, ?, ?)";
     private final String GET_ALL_USERS_QUERY = "SELECT * FROM usuarios";
     private final String GET_USER_QUERY = "SELECT * FROM usuarios WHERE idUsuario = ?";
     private final String MODIFY_USER_COMMAND = "UPDATE usuarios SET idUsuario = ?, nombre = ?, primerApellido = ?, segundoApellido = ?,"
-                + "correoInstitucional = ?, estado = ?, idRol = ? WHERE idUsuario = ?";
+                + "correoInstitucional = ?, estado = ?, tipoUsuario = ? WHERE idUsuario = ?";
     private final String DISABLE_USER_COMMAND = "UPDATE usuarios SET estado = 0 WHERE idUsuario = ?";
     private final String GET_USERS_BY_STATUS_QUERY = "SELECT * FROM usuarios WHERE estado = ?";
     private final String VERIFY_USER_EMAIL_QUERY = "SELECT COUNT(*) FROM usuarios WHERE correoInstitucional = ?";

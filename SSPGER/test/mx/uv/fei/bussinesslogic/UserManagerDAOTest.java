@@ -48,7 +48,7 @@ public class UserManagerDAOTest {
         user.setMiddleName("pruebaTransicion2");
         user.setLastName("pruebaTransicion2");
         user.setInstitutionalEmail("pruebaTransicion2");
-        user.setIdRole(1);
+        user.setType(1);
         user.setIdStatus(1);
     
         login.setIdLogin(9);

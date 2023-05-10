@@ -93,13 +93,12 @@ public class FeedBackController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         Path origenPath = Paths.get(selectedFile.getAbsolutePath());
         Path destinationPath = Paths.get(PATH_DESTINATION+ selectedFile.getName());
-        
+
         if (selectedFile != null) {
          
                 String fileName = selectedFile.getName();
                 String extentionName = fileName.substring(fileName.lastIndexOf(".") + 1, selectedFile.getName().length());
                 DeliverableFile deliverableFile = new DeliverableFile();
-                DeliverableFileDAO deliverableFileDAO = new DeliverableFileDAO();
                 
             try {
                 Files.copy(origenPath, destinationPath);              

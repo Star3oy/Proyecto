@@ -6,7 +6,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import mx.uv.fei.dataaccess.DataBaseManager;
 import mx.uv.fei.logic.Activity;
 
@@ -20,7 +23,9 @@ public class ActivityDAO implements IActivity{
     private final static String ADD_ACTIVITY_QUERY = "insert into actividades (titulo, detalles, fechaInicio,"
                 + "fechaFin, estado) values(?, ?, ?, ?, ?)";
     
-    private final static String GET_ACTIVITY_QUERY = "SELECT * into actividades WHERE idActividad = ?";
+    private final static String GET_ACTIVITY_QUERY = "SELECT * from actividades WHERE idActividad = ?";
+    private final static String GET_ALL_ACTIVITY = "SELECT * FROM actividades";
+    private final static String GET_ALL_ACTIVITY_BY_STATUS = "SELECT * FROM actividades WHERE estado = ?";
 
     @Override
     public int addActivity(Activity activity) throws SQLException {
@@ -61,12 +66,58 @@ public class ActivityDAO implements IActivity{
         activity.setTitle(result.getString("titulo"));
         activity.setDetails(result.getString("detalles")); 
         activity.setStartDate(result.getDate("fechaInicio"));
-        activity.setFinishDate(result.getDate("fechaFina"));
-        activity.setStatus(result.getInt("estatus"));
-        activity.setIdUsuario(result.getString("idUsuario"));
+        activity.setFinishDate(result.getDate("fechaFin"));
+        activity.setStatus(result.getInt("estado"));
+        activity.setIdUser(result.getString("idUsuario"));
         
         DataBaseManager.closeConnection();
         return activity;
     }
     
+        public List<Activity> getActivityList() throws SQLException{
+            List<Activity> activityList = new ArrayList<>();
+            String query = GET_ALL_ACTIVITY;
+           
+            Connection connection = DataBaseManager.getConnection(); 
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            
+            while(result.next()){
+                Activity activity = new Activity();                 
+            activity.setIdActivity(result.getInt("idActividad"));
+            activity.setTitle(result.getString("titulo"));
+            activity.setDetails(result.getString("detalles")); 
+            activity.setStartDate(result.getDate("fechaInicio"));
+            activity.setFinishDate(result.getDate("fechaFin"));
+            activity.setStatus(result.getInt("estado"));
+            activity.setIdUser(result.getString("idUsuario"));
+            activityList.add(activity);
+            }
+            DataBaseManager.closeConnection();
+            return activityList;
+        }
+    
+       public List<Activity> getActivityListByStatus(int status) throws SQLException{
+            List<Activity> activityList = new ArrayList<>();
+            String query = GET_ALL_ACTIVITY_BY_STATUS;
+           
+            Connection connection = DataBaseManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, status);
+            ResultSet result= statement.executeQuery();
+            
+            while(result.next()){
+                Activity activity = new Activity();                 
+            activity.setIdActivity(result.getInt("idActividad"));
+            activity.setTitle(result.getString("titulo"));
+            activity.setDetails(result.getString("detalles")); 
+            activity.setStartDate(result.getDate("fechaInicio"));
+            activity.setFinishDate(result.getDate("fechaFin"));
+            activity.setStatus(result.getInt("estado"));
+            activity.setIdUser(result.getString("idUsuario"));
+            activityList.add(activity);
+            }
+            DataBaseManager.closeConnection();
+            return activityList;
+        }
 }

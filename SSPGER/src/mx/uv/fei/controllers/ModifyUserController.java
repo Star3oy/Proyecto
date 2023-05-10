@@ -81,8 +81,8 @@ public class ModifyUserController implements Initializable  {
 
     @FXML
     void buttonSave(ActionEvent event) {
-        int STUDENT_ROL = 4;
-        int PROFESSOR_ROL = 2;
+        int STUDENT_TYPE = 1;
+        int PROFESSOR_TYPE = 0;
         int ACTIVE = 1;
         
         User user = new User();
@@ -93,25 +93,22 @@ public class ModifyUserController implements Initializable  {
         user.setInstitutionalEmail(textFieldInstitutionalEmail.getText());
         user.setIdStatus(ACTIVE);
         if(checkBoxStudent.isSelected()) {
-            user.setIdRole(STUDENT_ROL);
+            user.setType(STUDENT_TYPE);
         } else if (checkBoxProfessor.isSelected()) {
-            user.setIdRole(PROFESSOR_ROL);
+            user.setType(PROFESSOR_TYPE);
         }   
-        UserDAO instance = new UserDAO();
-        
-     try{
-           if(instance.modifyUser(user, "12345") == 1) {     
+        UserDAO userDAO = new UserDAO();      
+     try {
+           if(userDAO.modifyUser(user, idUser) == 1) {     
             JOptionPane.showMessageDialog(null, "La información se modificó correctamente en el sistema",
                                         "Modificación exitosa", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo conectar con la base de datos. Inténtelo más tarde o hágalo más tarde", 
                                         "ERROR", JOptionPane.ERROR_MESSAGE); 
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
               
-        }
-        
-        
+        } 
     }
     
      void infoUser(){
