@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.uv.fei.controllers.CoursereportController">
+           <children>
+      <Pane prefHeight="70.0" prefWidth="1280.0" style="-fx-background-color: #58d68d;">
+         <children>
+            <Label layoutX="104.0" layoutY="20.0" text="SSPGER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="855.0" layoutY="12.0" text="Universidad Veracruzana">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="315.0" layoutY="12.0" text="Reporte Curso">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="70.0" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: #85c1e9;">
+         <children>
+            <Pane layoutX="103.0" layoutY="17.0" prefHeight="135.0" prefWidth="1091.0" style="-fx-background-color: FFFFFFFF;">
+               <children>
+                  <Label alignment="CENTER" layoutY="8.0" prefHeight="45.0" prefWidth="1091.0" text="Reporte General del curso ">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelCourseName" alignment="CENTER" layoutX="1.0" layoutY="53.0" prefHeight="17.0" prefWidth="1091.0" text="Nombre del curso ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelNRC" alignment="TOP_LEFT" layoutX="76.0" layoutY="108.0" prefHeight="27.0" prefWidth="187.0" text="NRC: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelSection" layoutX="512.0" layoutY="108.0" prefHeight="27.0" prefWidth="76.0" text="Sección: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelBlock" layoutX="840.0" layoutY="108.0" prefHeight="27.0" prefWidth="68.0" text="Bloque: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <TableView fx:id="TableCourseReport" layoutX="103.0" layoutY="187.0" prefHeight="396.0" prefWidth="1091.0">
+              <columns>
+                <TableColumn fx:id="columnIdentificator" prefWidth="98.0" text="Matricula" />
+                <TableColumn fx:id="columnName" prefWidth="322.0" text="Nombre" />
+                  <TableColumn fx:id="columnReceptionalWork" prefWidth="390.0" text="Trabajo recepcional" />
+                  <TableColumn fx:id="columnNumberOfActivities" prefWidth="109.0" text="No. Actividades" />
+                  <TableColumn fx:id="columnNumberOfActivitiesCompleted" prefWidth="171.0" text="No. Actividades completadas" />
+              </columns>
+            </TableView>
+            <Button fx:id="buttonDownloadPDF" layoutX="1100.0" layoutY="599.0" mnemonicParsing="false" onAction="#buttonDownloadPDF" text="Descargar PFD" />
+         </children></Pane>
+   </children>  
+</AnchorPane>

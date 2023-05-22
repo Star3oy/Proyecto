@@ -54,7 +54,7 @@
                   <Button fx:id="buttonInactives" layoutX="65.0" layoutY="157.0" mnemonicParsing="false" onAction="#buttonInactives" prefHeight="45.0" prefWidth="147.0" text="Inactivos" />
                </children>
             </Pane>
-            <TableView fx:id="tableUsers" layoutX="338.0" layoutY="111.0" prefHeight="300.0" prefWidth="533.0">
+            <TableView fx:id="tableUsers" layoutX="338.0" layoutY="104.0" prefHeight="300.0" prefWidth="533.0">
               <columns>
                 <TableColumn fx:id="columIdentificator" prefWidth="265.0" text="Identificador" />
                 <TableColumn fx:id="columnName" prefWidth="267.0" text="Nombre" />
