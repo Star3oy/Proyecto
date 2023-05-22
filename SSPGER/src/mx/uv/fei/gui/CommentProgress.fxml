@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="Filebox" prefHeight="189.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.uv.fei.controllers.CommentProgressController">
+   <children>
+      <Pane prefHeight="173.0" prefWidth="330.0" style="-fx-background-color: #77C8EE;">
+         <children>
+            <Label fx:id="labelComment" layoutX="10.0" layoutY="8.0" text="Comentario">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelAuthor" layoutX="266.0" layoutY="15.0" text="Autor" />
+            <TextArea fx:id="textAreaComment" layoutX="10.0" layoutY="47.0" prefHeight="114.0" prefWidth="422.0" />
+         </children>
+      </Pane>
+   </children>
+</VBox>

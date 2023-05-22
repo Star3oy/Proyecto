@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="251.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.uv.fei.controllers.FileCardController">
+   <children>
+      <Pane prefHeight="99.0" prefWidth="212.0" style="-fx-border-color: #000000;">
+         <children>
+            <ImageView fx:id="imageViewAdobeIcon" fitHeight="55.0" fitWidth="39.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/kisspng-pdf-computer-icons-adobe-acrobat-encapsulated-post-pdf-5adb3ce7876a62.0942469115243174155547.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelFileTitle" layoutX="67.0" layoutY="19.0" text="Tíutolo del archivo ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imageViewDownloaderIcon" fitHeight="20.0" fitWidth="21.0" layoutX="175.0" layoutY="59.0" onMouseClicked="#downloadImageClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/kisspng-computer-icons-download-5aff55f0e32a02.6688995615266831209305.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</HBox>
