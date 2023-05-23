@@ -23,7 +23,7 @@ import mx.uv.fei.logic.Activity;
  * @author Star3oy
  */
 public class ModifyActivityController implements Initializable {
-    public static int  idActivity;
+    public static String  title;
     
     
     @FXML
@@ -58,7 +58,7 @@ public class ModifyActivityController implements Initializable {
         Activity activity = new Activity();
         ActivityDAO activityDAO = new ActivityDAO();   
         try {
-            activity = activityDAO.getActivity(idActivity);
+            activity = activityDAO.getActivity(title);
         } catch (SQLException ex) {
             Logger.getLogger(ModifyActivityController.class.getName()).log(Level.SEVERE, null, ex);
         }
