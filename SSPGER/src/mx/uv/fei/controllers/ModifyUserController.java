@@ -115,7 +115,7 @@ public class ModifyUserController implements Initializable  {
      User user = new User();
      UserDAO userDAO = new UserDAO();
      try {
-          user = userDAO.getUser(idUser);
+          user = userDAO.getUserById(idUser);
      } catch (SQLException sQLExcpetion) {
          JOptionPane.showMessageDialog(null, "No se pudo conectar con la base de datos. Inténtelo más tarde o hágalo más tarde", 
                                         "ERROR", JOptionPane.ERROR_MESSAGE);   
