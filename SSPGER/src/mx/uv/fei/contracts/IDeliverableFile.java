@@ -10,6 +10,7 @@ import mx.uv.fei.logic.DeliverableFile;
  */
 public interface IDeliverableFile {
     int addDeliverableFile (DeliverableFile deliverableFile) throws SQLException;
-    DeliverableFile getUser (String idDeliverableFile)throws SQLException;
+    DeliverableFile getDeliverableFile (String deliverableFileName)throws SQLException;
+    DeliverableFile getDeliverableFileByProgress (int idProgress) throws SQLException;
     
 }
