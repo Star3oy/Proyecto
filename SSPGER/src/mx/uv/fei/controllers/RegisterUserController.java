@@ -13,7 +13,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import mx.uv.fei.implementations.UserDAO;
-import mx.uv.fei.implementations.UserManagerDAO;
 import mx.uv.fei.logic.Login;
 import mx.uv.fei.logic.User;
 
@@ -68,16 +67,13 @@ public class RegisterUserController implements Initializable{
            checkBoxProfessor.setDisable(false);
         }
     }
-    
-    
 
     @FXML
     private void buttonSave(ActionEvent event) {
         int STUDENT_TYPE = 1;
         int PROFESSOR_TYPE = 0;
         int ACTIVE = 1;
-        
-        
+ 
         User user = new User();
         user.setIdUser(textFieldIdentificator.getText());
         user.setFirstName(textFieldFirstName.getText());
@@ -96,10 +92,10 @@ public class RegisterUserController implements Initializable{
         login.setIdUser(textFieldIdentificator.getText());
         login.setPassword(textFieldPassword.getText());
         
-        UserManagerDAO userManagerDAO = new UserManagerDAO();
+        UserDAO userDAO = new UserDAO();
         
      try{
-           if(userManagerDAO.userAdditionTransition(user, login) == 2) {     
+           if(userDAO.userAdditionTransition(user, login) == 2) {     
             JOptionPane.showMessageDialog(null, "La información se registró correctamente en el sistema",
                                         "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -117,7 +113,6 @@ public class RegisterUserController implements Initializable{
      
     }
 
-    
   private boolean isNotItemEmpty (){
       boolean result = false;
       if (textFieldFirstName.getText().isEmpty() || textFieldIdentificator.getText().isEmpty() ||
@@ -139,21 +134,6 @@ public class RegisterUserController implements Initializable{
       return result;
   }
   
-
-    private boolean emailDontExist ()  throws SQLException {
-     boolean result = false;
-     String email = textFieldInstitutionalEmail.getText();
-     UserDAO userDAO = new UserDAO();
-     try {
-     if(userDAO.verifyUserEmail(email) == 0) {
-         result = true;
-        }
-     } catch (SQLException sQLException) {
-         throw sQLException;
-     }
-        return result;
-    }
-
     public void cleanTextField(){
     textFieldFirstName.setText("");
     textFieldIdentificator.setText("");

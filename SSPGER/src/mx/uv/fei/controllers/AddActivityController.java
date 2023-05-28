@@ -58,6 +58,7 @@ public class AddActivityController implements Initializable {
 
     @FXML
     private void buttonCancel(ActionEvent event) {
+    
     }
     
 }
