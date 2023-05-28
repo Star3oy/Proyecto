@@ -16,8 +16,6 @@ import mx.uv.fei.logic.User;
  */
 
 public class UserDAO implements IUser{
-    
-    
     private final String ADD_USER_COMMAND = "insert into usuarios(idUsuario, nombre, primerApellido, segundoApellido,"
                 + "correoInstitucional, estado, tipoUsuario) values(?, ?, ?, ?, ?, ?, ?)";
     private final String GET_ALL_USERS_QUERY = "SELECT * FROM usuarios";
@@ -58,7 +56,8 @@ public class UserDAO implements IUser{
         String query = GET_ALL_USERS_QUERY;
         Connection connection = DataBaseManager.getConnection(); 
         Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery(query);              
+        ResultSet result = statement.executeQuery(query);
+        
             while(result.next()) {
                 User user = new User();
                 user.setIdUser(result.getString("idUsuario"));
@@ -75,7 +74,7 @@ public class UserDAO implements IUser{
     }
 
     @Override
-    public User getUser(String idUser) throws SQLException {
+    public User getUserById(String idUser) throws SQLException {
         User user = new User();
         String query = GET_USER_QUERY;
         Connection connection = DataBaseManager.getConnection();
@@ -98,11 +97,11 @@ public class UserDAO implements IUser{
 
     @Override 
     public int modifyUser(User user, String idUser) throws SQLException {
-      int result = 0;
-     String query = MODIFY_USER_COMMAND;
+        int result = 0;
+        String query = MODIFY_USER_COMMAND;
 
-      Connection connection = DataBaseManager.getConnection();
-         PreparedStatement statement = connection.prepareStatement(query);
+        Connection connection = DataBaseManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, user.getIdUser());
         statement.setString(2, user.getFirstName());
         statement.setString(3, user.getMiddleName());
@@ -115,35 +114,33 @@ public class UserDAO implements IUser{
          if (result == 0) {
             throw new SQLException ("Error al modificar usuario");
         }
-
-         DataBaseManager.closeConnection();
-     
-     return result;
+        DataBaseManager.closeConnection();
+        return result;      
    }
 
     @Override
     public int disableUser(String idUser) throws SQLException {
-     int result = 0;
-     String query =  DISABLE_USER_COMMAND;
-     Connection connection = DataBaseManager.getConnection();
+        int result = 0;
+        String query = DISABLE_USER_COMMAND;
+        Connection connection = DataBaseManager.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, idUser);
         result = statement.executeUpdate();
+            
         if (result == 0) {
             throw new SQLException ("Error al desactivar usuario");
         }
-
-      DataBaseManager.closeConnection();
-     return result;
+        DataBaseManager.closeConnection();
+        return result;
   }
 
     @Override
     public int verifyUserExistence(User user) throws SQLException {
-      int cont = 0;
-      String query = "SELECT COUNT(*) FROM usuarios WHERE (idusuario = ? AND nombre = ?) AND"
+        int cont = 0;
+        String query = "SELECT COUNT(*) FROM usuarios WHERE (idusuario = ? AND nombre = ?) AND"
               +"(primerApellido = ? AND segundoApellido = ?)";
         Connection connection = DataBaseManager.getConnection();
-          
+        
         PreparedStatement statement = connection.prepareStatement(query);
         
         statement.setString(1, user.getIdUser());
@@ -172,7 +169,7 @@ public class UserDAO implements IUser{
         DataBaseManager.closeConnection();
       return cont;
     }
-
+    
     @Override
     public List<User> getUsersByStatus(int status) throws SQLException {  
         List<User> userList = new ArrayList<>(); 
@@ -190,5 +187,34 @@ public class UserDAO implements IUser{
             }        
          DataBaseManager.closeConnection();
          return userList;
+    }
+  
+    
+    @Override
+    public List<User> getUsersByType (int type)throws SQLException {
+        List<User> userList = new ArrayList<>();
+        String query = "SELECT * FROM usuarios WHERE tipoUsuario = ?";
+        
+        try (Connection connection = DataBaseManager.getConnection()) { 
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, type);
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                User user = new User();
+                user.setIdUser(result.getString("idUsuario"));
+                user.setFirstName(result.getString("nombre"));
+                user.setMiddleName(result.getString("primerApellido"));
+                user.setLastName(result.getString("segundoApellido"));
+                user.setInstitutionalEmail(result.getString("correoInstitucional"));
+                user.setIdStatus(result.getInt("estado"));
+                user.setType(result.getInt("tipoUsuario"));
+                userList.add(user);
+            }   
+        } catch (SQLException sQLException){
+            throw sQLException;
+        } finally {
+            DataBaseManager.closeConnection();
+        }
+        return userList;
     }
 }

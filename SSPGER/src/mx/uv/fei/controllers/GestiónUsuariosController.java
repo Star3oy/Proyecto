@@ -64,15 +64,15 @@ public class GestiónUsuariosController implements Initializable {
      @Override
     public void initialize(URL url, ResourceBundle rb) { 
            fillTable();
-    }   
-   
+    }
+  
     @FXML
     void buttonAssets(ActionEvent event) throws SQLException {
         int ACTIVES = 1;
-        this.fillTableByStatus(ACTIVES);
+        this.fillTableByStatus(ACTIVES); 
     }
-    
-    @FXML
+  
+   @FXML
     void buttonInactives(ActionEvent event) throws SQLException {
         int INACTIVES = 0;
        this.fillTableByStatus(INACTIVES);
@@ -84,7 +84,7 @@ public class GestiónUsuariosController implements Initializable {
         tableUsers.getItems().clear();
         tableUsers.refresh(); 
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.getUser(idUser);
+        User user = userDAO.getUserById(idUser);
         list.add(new TableUsers (user.getIdUser(), user.getFirstName()));
         tableUsers.setItems(list);
         columIdentificator.setCellValueFactory(new PropertyValueFactory<TableUsers, String>("identificator"));
@@ -119,7 +119,7 @@ public class GestiónUsuariosController implements Initializable {
 
     @FXML
     void buttonCreateUser(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("registerUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/uv/fei/gui/registerUser.fxml"));
         Parent root;
     
         try {
@@ -134,7 +134,7 @@ public class GestiónUsuariosController implements Initializable {
         }
     }
     
-    void fillTable () {
+    void fillTable() {
      UserDAO userDAO = new UserDAO();
      List<User> userList;
         try {

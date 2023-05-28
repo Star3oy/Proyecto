@@ -14,6 +14,7 @@ import mx.uv.fei.logic.UserTable;
  * @author sue
  */
 public class UserTableDAO {
+<<<<<<< HEAD
     private final String GET_STUDENTS_NOT_SELECTED_QUUERY = "SELECT * FROM usuarios WHERE tipoUsuario = ? AND estado = ? "
             + "AND idUsuario NOT IN (SELECT uc.idUsuario FROM usuarios_cursos uc INNER JOIN cursos c ON uc.idCurso = c.idCurso "
             + "WHERE c.nombre = ? AND c.estado = ?)";
@@ -42,6 +43,27 @@ public class UserTableDAO {
                 userTable.setType(result.getInt("tipoUsuario"));
                 userTables.add(userTable);
             }
+=======
+    public List<UserTable> getStudents() throws SQLException {
+        List<UserTable> userTables = new ArrayList<>();
+        
+        try (Connection connection = DataBaseManager.getConnection()) {
+            String query = "SELECT * FROM usuarios WHERE idRol = 4 AND estado = 1";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            
+            while(result.next()) {
+                UserTable userTable = new UserTable();
+                userTable.setIdUser(result.getString("idUsuario"));
+                userTable.setFirstName(result.getString("nombre"));
+                userTable.setMiddleName(result.getString("primerApellido"));
+                userTable.setLastName(result.getString("segundoApellido"));
+                userTable.setType(result.getInt("tipoUsuario"));
+                userTables.add(userTable);
+            }
+        } catch (SQLException sQLException){
+            throw sQLException;
+>>>>>>> origin/Lalo-2.0
         } finally {
             DataBaseManager.closeConnection();
         }

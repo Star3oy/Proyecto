@@ -109,7 +109,7 @@ public class UserDAOTest {
         expResult.setType(4);
         
         UserDAO instance = new UserDAO();
-        User result = instance.getUser(expResult.getIdUser());
+        User result = instance.getUserById(expResult.getIdUser());
 
         assertEquals(expResult, result);
 
